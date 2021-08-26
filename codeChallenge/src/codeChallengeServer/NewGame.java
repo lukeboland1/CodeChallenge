@@ -20,6 +20,7 @@ public class NewGame implements Runnable {
 
         client1.write("Board state \n" + board.toString());
         client2.write("Board state\n" + board.toString());
+        client2.write("Wating on Player 1s move....");
 
         boolean exit = false;
         boolean player1Turn = true;
@@ -59,13 +60,22 @@ public class NewGame implements Runnable {
                 		player1Turn = true;
                     	exit = false;	
                     }
+                    else
+                    {
+                    	client1.write("Rematch declined, session over");
+                    }
+                }
+                else
+                {
+                	client2.write("Rematch declined, session over");
                 }
                 
             	
             }
 
         }
-        
+        client1.write("EXITING...");
+        client2.write("EXITING...");
         client1.close();
         client2.close();
     }
