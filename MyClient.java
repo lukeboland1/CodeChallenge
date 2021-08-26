@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class MyClient 
 {
+	public static boolean finish = false;
     public static void main(String[] args) throws IOException 
     {
     	final String HOST = "127.0.0.1";
@@ -34,11 +35,21 @@ public class MyClient
                                 message = message + (char) nextChar;
                             }
                             System.out.println(message);
+                            if(message.contains("EXIT"))
+                            {
+                            	System.out.println("Press Enter to exit the application");
+                            	finish = true;
+                            }
                         }
                     } 
                     catch (IOException e) 
                     {
                         e.printStackTrace();
+                    }
+                    
+                    if(finish)
+                    {
+                    	break;
                     }
                 }
             }
@@ -62,6 +73,10 @@ public class MyClient
                     {
                         e.printStackTrace();
                     }
+                 if(finish)
+                 {
+                	 break;
+                 }
                 }
             }
         });
