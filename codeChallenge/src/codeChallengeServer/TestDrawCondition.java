@@ -8,6 +8,7 @@ class TestDrawCondition {
 
 	@Test
 	void test() {
+		//unit test to check if the method to check if the game is drawn works
 		BoardState board = new BoardState(6,9);
 		board.fillGrid();
 		System.out.println(board.toString());

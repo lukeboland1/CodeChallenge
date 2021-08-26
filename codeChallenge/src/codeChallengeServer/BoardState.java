@@ -9,11 +9,12 @@ public class BoardState {
 
 	  public BoardState(int h, int w) 
 	  {
+		//setting height and width of 2D array representing the board
 	    width = w;
 	    height = h;
 	    grid = new String[h][w];
 
-	    
+	    //filling the array with empty spots
 	    for (int i = 0; i < h; i++) 
 	    {
 	    	for (int j = 0; j < w; j++)
@@ -27,6 +28,7 @@ public class BoardState {
 	  
 	  public String toString() 
 	  {
+		  //returns a string representation of the current board state
 		  String string = new String();
 		  for(int i =0;i< height; i++){
 			    for (int j = 0; j < width; j++) 
@@ -44,6 +46,7 @@ public class BoardState {
 	  
 	 public String checkHorizontal(int row)
 	 {
+		 //returns a string representing the horizontal values of the row you request
 		 StringBuilder sb = new StringBuilder();
 		 for (int j = 0; j < width; j++) 
 		    {
@@ -54,6 +57,7 @@ public class BoardState {
 	 
 	 public String checkVertical(int column)
 	 {
+		//returns a string representing the vertical values of the column you request
 		 StringBuilder sb = new StringBuilder();
 		 for (int j = 0; j < height; j++) 
 		    {
@@ -64,6 +68,7 @@ public class BoardState {
 	 
 	 public String checkNorthWestDiagonal(int row, int column)
 	 {
+		//returns a string representing the / diagonal values of the position you request
 		 StringBuilder sb = new StringBuilder();
 		 int r = 0, c = 0;
 		 for (int j = column, i = row; j >= 0 && i >= 0; j--, i--) 
@@ -81,6 +86,7 @@ public class BoardState {
 	 
 	 public String checkNorthEastDiagonal(int row, int column)
 	 {
+		//returns a string representing the \ diagonal values of the position you request
 		 StringBuilder sb = new StringBuilder();
 		 int r = 0, c = 0;
 		 for (int j = column, i = row; j <width && i >= 0; j++, i--) 
@@ -98,6 +104,7 @@ public class BoardState {
 	 
 	 public boolean makeTurn(int column, String mark)
 	 {
+		 //logic to make a Turn. parameters are the column you wish to place your mark and which mark the player is for this turn
 		 boolean found = false;
 		 for (int j = column, i = height - 1; i >=0 && j >= 0 && found == false; i--) 
 		   {
@@ -127,6 +134,8 @@ public class BoardState {
 
 	public boolean checkWin()
 	 {
+		 //checks if any win condition has been achieved
+		 //based on last move checks if any row column or diagonal affected by last move has a full row of xs or os
 		 boolean win = false;
 		 String horizontal = this.checkHorizontal(lastRow);
 		 String vertical = this.checkVertical(lastColumn);
@@ -155,6 +164,8 @@ public class BoardState {
 	
 	public boolean checkDraw()
 	 {
+		 //checks if the top column is full, if it isnt there is still room to move 
+		 //if it is full and no win condition has been achieved its a draw 
 		 String s = this.checkHorizontal(0);
 		 if(s.contains("[ ]"))
 		 {

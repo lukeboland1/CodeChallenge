@@ -13,6 +13,7 @@ public class NewGame implements Runnable {
     public NewGame(Client client1, Client client2) throws IOException {
         this.client1 = client1;
         this.client2 = client2;
+        //creating a 6 x 9 board
         board = new BoardState(6,9);
     }
 
@@ -30,19 +31,24 @@ public class NewGame implements Runnable {
 
         while (!exit) {
             
-            if (player1Turn) {
+            if (player1Turn) 
+            {
+            	//make turn for player 1
                 exit = play(client1, client2, player1Mark);
                 player1Turn = false;
             }
 
             
-            else {
+            else 
+            {
+            	//make turn for player 2
                 exit = play(client2, client1, player2Mark);
                 player1Turn = true;
             }
             
             if(exit)
             {
+            	//ask both players if they wish to rematch
             	client1.write("Play again? Enter y or n: ");
             	client2.write("Awaiting player ones option for rematch");
                 String message = client1.read();
@@ -55,11 +61,13 @@ public class NewGame implements Runnable {
                     {
                     	client1.write("Rematch accepted: New game beginning...");
                     	client2.write("Rematch accepted: New game beginning...waiting on Player 1s move");
+                    	//reset board for the new game
                     	board = new BoardState(6,9);
                     	client1.write(board.toString());
                         client2.write(board.toString());
                 		player1Turn = true;
-                    	exit = false;	
+                    	exit = false;
+                    	//exit remains false so game logic continues and rematch starts
                     }
                     else
                     {
@@ -75,6 +83,7 @@ public class NewGame implements Runnable {
             }
 
         }
+        //writing EXITING to denote the session is over
         client1.write("EXITING....");
         client2.write("EXITING....");
         client1.close();
@@ -91,10 +100,14 @@ public class NewGame implements Runnable {
                 {
                     c1.write("It's your turn " + c1.getName() + ", Please enter column  1-9: ");
                     message = c1.read();
+                    //check if you can parse input as an integer, if not exception is thrown
                     int column = Integer.parseInt(message);
+                    //check if integer is 1-9
                     if (column > 0 && column < 10)
                     {
+                    	//makes the turn using the column entered by user and their mark (x or o)
                     	marked = board.makeTurn(column-1, mark);
+                    	//checks if turn was successfully made, if column was full then it asks for a new column
                     	if(!marked)
                         {
                         	c1.write("Column is full please choose another:");
@@ -121,6 +134,7 @@ public class NewGame implements Runnable {
             c1.write(board.toString());
             c2.write(board.toString());
             
+            //checks if the player making the move has won
             winningMove = board.checkWin();
             if(winningMove)
             {
@@ -128,6 +142,7 @@ public class NewGame implements Runnable {
                 c2.write("Game over - You lose");
             	return true;
             }
+            //checks if the board is now full hence a draw
             boolean draw = board.checkDraw();
             if(draw)
             {
@@ -135,6 +150,7 @@ public class NewGame implements Runnable {
                 c2.write("Game over - Draw as all squares are filled with no win");
                 return true;
             }
+            //otherwise continues to next move
             c1.write("Wait for opponents move.........");
             c2.write("Your move!!!...........");
         }

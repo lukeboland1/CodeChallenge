@@ -8,6 +8,7 @@ class TestWinCondition {
 
 	@Test
 	void test() {
+		//unit test to check if the win condition method works
 		BoardState board = new BoardState(6,9);
 		board.makeTurn(1, "x");
 		board.makeTurn(1, "x");

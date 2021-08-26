@@ -13,6 +13,7 @@ public class Client {
     String name;
 
     Client(Socket socket) throws IOException {
+    	//setting up input and output streams for the client
         this.socket = socket;
         is = socket.getInputStream();
         os = socket.getOutputStream();
@@ -46,6 +47,7 @@ public class Client {
             {
                 if (is.available() > 0) 
                 {
+                	//checks if next character is a & symbol. & symbol is used to denote the end of a message
                     int nextChar;
                     while ((nextChar = is.read()) != 38) 
                     {
@@ -66,6 +68,7 @@ public class Client {
     {
         try 
         {
+        	//writes the message with & at the end to denote the end of the message
             os.write((message+"&").getBytes());
             os.flush();
         } 
@@ -79,6 +82,7 @@ public class Client {
     {
         try 
         {
+        	//closing sockets and streams
             socket.close();
             os.close();
             is.close();
