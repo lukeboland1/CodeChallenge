@@ -1,8 +1,7 @@
 # CodeChallenge
+Server application - MyServer.java in the CodeChallenge directory.
+Client application - MyClient.java in the root directory
 
-Instructions:
-1. Import CodeChallenge project into your IDE.
-2. Run MyServer.java. The server will wait for two clients to connect.
-3. Run javac MyClient.java in a directory of your choice
-4. Open two command line terminals at the directory you compiled MyClient and run MyClient.java on both of them.
-5. Once both players connect the game will begin. Follow prompts on screen to play.
+Import the CodeChallenge project into your IDE and run MyServer.java
+Compile MyClient.java and run MyClient in two seperate cmd consoles
+Game will begin once both Clients connect.
