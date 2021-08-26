@@ -1,6 +1,7 @@
 package codeChallengeServer;
 
 import java.io.IOException;
+import java.net.SocketTimeoutException;
 
 public class NewGame implements Runnable {
 
@@ -17,7 +18,7 @@ public class NewGame implements Runnable {
 
     @Override
     public void run() {
-
+    	
         client1.write("Board state \n" + board.toString());
         client2.write("Board state\n" + board.toString());
         client2.write("Wating on Player 1s move....");
@@ -106,9 +107,11 @@ public class NewGame implements Runnable {
                     }
                     
                 }
+                
                 catch(NumberFormatException er){
                 	c1.write("Invalid input, please enter an integer 1-10");
                 }
+                
     
                 
             }

@@ -19,8 +19,6 @@ class MyServer
                 //setting up player 1
                 System.out.println("Waiting for Player 1");
                 socket = serverSocket.accept();
-                //socket.setKeepAlive(true);
-                //socket.setSoTimeout(600);
                 Client c1 = new Client(socket);
                 System.out.println("Player 1 has joined");
                 c1.write("You are player X");

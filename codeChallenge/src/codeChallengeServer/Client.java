@@ -16,6 +16,7 @@ public class Client {
         this.socket = socket;
         is = socket.getInputStream();
         os = socket.getOutputStream();
+        //socket.setSoTimeout(60000);
         initialSetup();
         
     }
