@@ -74,8 +74,8 @@ public class NewGame implements Runnable {
             }
 
         }
-        client1.write("EXITING...");
-        client2.write("EXITING...");
+        client1.write("EXITING....");
+        client2.write("EXITING....");
         client1.close();
         client2.close();
     }
